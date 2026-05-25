@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  APP_MESSAGE: "Hello from ConfigMap"
+  ENV_VALUE: "Hello from ConfigMap"
