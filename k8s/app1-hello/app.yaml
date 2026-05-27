@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app1-hello
+  template:
+    metadata:
+      labels:
+        app: app1-hello
+    spec:
+      containers:
+      - name: app1-hello
+        image: sarangasl/hello-spring:latest
+        # env:
+        # - name: APP_MESSAGE
+        #   value: "hELLO FROM APP.YAML"
+        # - name: DB_PASSWORD
+        #   value: "CGHANMm4Q="
+        env:
+        - name: ENV_VALUE
+          value: "Hello from app.yaml"
+        - name: DB_PASSWORD
+          value: "CGHANMm4Q="
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-hello
+spec:
+  selector:
+    app: app1-hello
+  type: NodePort
+  ports:
+    -  port: 8080
+       targetPort: 8080
+       nodePort: 32000
