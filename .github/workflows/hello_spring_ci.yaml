@@ -1,7 +1,10 @@
 name: Hello Spring boot App to Docker
 
 on:
-  push
+  workflow_dispatch:
+  push:
+    paths:
+        - 'docker/app1-hello/springboot/hello-spring'
 
 jobs:
     build-test:
@@ -58,6 +61,6 @@ jobs:
                 push: true
                 tags: |
                     ${{ secrets.DOCKER_USERNAME }}/hello-spring:latest
-                    ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.sha }}
-                    ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.ref_name }}
+                    # ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.sha }}
+                    # ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.ref_name }}
 
