@@ -69,7 +69,7 @@ jobs:
     
         steps:
             - name: Checkout code
-              run: echo "Checkout not needed for this job"
+              uses: actions/checkout@v4
             
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v5.1.1
