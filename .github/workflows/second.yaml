@@ -9,4 +9,4 @@ jobs:
     
         steps:
             - name: Say Hello
-            uses: echo "Hello from the terminal second workflow!"
+              run: echo "Hello from the terminal second workflow!"
