@@ -2,7 +2,8 @@ name: Hello Node App to Docker
 
 on:
   push:
-    # path: ""
+    paths:
+      - "docker/app1-hello/node" 
   workflow_dispatch:
 
 jobs:
