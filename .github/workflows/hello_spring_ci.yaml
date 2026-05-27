@@ -33,16 +33,30 @@ jobs:
     
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v2
             
             - name: Setup JDK
-              run : echo ""
+              uses: actions/setup-java@v5
+              with:
+                    distribution: 'temurin' # See 'Supported distributions' for available options
+                    java-version: '21'
 
             - name: Build JAR for Docker
-              run: echo ""
+              working-directory: docker/app1-hello/springboot/hello-spring
+              run: mvn -B clean package -DskipTests
             
             - name: Login to DockerHub
-              run: echo ""
+              uses: docker/login-action@v4
+              with:
+                username: ${{ secrets.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
             
             - name: Build and Push Docker Image
-              run: echo "" 
+              uses: docker/build-push-action@v7
+              with:
+                context: docker/app1-hello/springboot/hello-spring
+                push: true
+                tags: |
+                    ${{ secrets.DOCKER_USERNAME }}/hello-spring:latest
+                    ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.sha }}
+                    ${{ secrets.DOCKER_USERNAME }}/hello-spring:${{ github.ref_name }}
