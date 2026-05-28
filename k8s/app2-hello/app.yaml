@@ -13,8 +13,9 @@ spec:
         app: app1-hello
     spec:
       containers:
-      - name: app1-hello
+      - name: hello-node
         image: sarangasl/hello-node:latest
+        imagePullPolicy: Always  # Forces K8s to pull your fresh code edits
         env:
         - name: ENV_VALUE
           value: "Hello from app.yaml"
@@ -33,5 +34,5 @@ spec:
   type: LoadBalancer
   ports:
      - protocol: TCP
-       port: 80
-       targetPort: 3000
+       port: 80         # Exposed to the browser (http://your-url.amazonaws.com)
+       targetPort: 3000 # Matches your Node app PORT
